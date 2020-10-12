@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+
+    <title>回歸直線畫圖器</title>
+  </head>
+  <body>
+    <br>
+    <h5 class="text-center">
+      回歸直線畫圖器
+    </h5>
+    <br>
+    <div class="container" id="viewer">
+      
+      <div class="form-group">
+        <label for="exampleInputEmail1">資料數</label>
+        <input type="number" class="form-control" id="Num" />
+      </div>
+      <br>
+      <button
+        type="button"
+        class="btn btn-primary"
+        onclick="inputNumber($('#Num').val())"
+      >
+        Submit
+      </button>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script>
+      var total = 0
+      
+      function inputNumber(a) {
+        $("#viewer").html('<table class="table"><thead><tr id="table_tr"><th>#</th><th>X</th><th>Y</th></tr></thead><tbody id="table_content"></tbody></table><br><div class="form-group"><label for="exampleInputEmail1">標題</label><input type="text" class="form-control" id="input_title"></div><div class="form-group"><label for="exampleInputEmail1">X軸名稱</label><input type="text" class="form-control" id="input_xname"></div><div class="form-group"><label for="exampleInputEmail1">Y軸名稱</label><input type="text" class="form-control" id="input_yname"></div><br><button class="btn btn-success btn-block" onclick="outputImage()">生成</button><br><br><br>');
+        total = a;
+        for (var i = 1; i <= a; i++) {
+          $("#table_content").append('<tr><td>' + i + '</td><td><input type="number" class="form-control" id="row1_' + i +'"></td><td><input type="number" class="form-control" id="row2_' + i +'"></td></tr>');
+        }
+      }
+      
+      function outputImage(){
+        var data = []
+        var max,min
+        for(var i = 0; i< total; i++){
+          data[i] = [Number($("#row1_" + (i+1)).val()),Number($("#row2_" + (i+1)).val())];
+        }
+        var mux=0,muy=0
+        max = data[0][0]
+        min = data[0][0]
+        for(var i = 0; i< total; i++){
+          mux += data[i][0]
+          muy += data[i][1]
+          if(data[i][0] > max){
+            max = data[i][0]
+          }if(data[i][0] < min){
+            min = data[i][0]
+          }
+        }
+        mux /= total
+        muy /= total
+        var down=0,up=0
+        for(var i = 0; i< total; i++){
+          up += (data[i][0]-mux)*(data[i][1]-muy)
+          down += (data[i][0]-mux)*(data[i][0]-mux)
+        }
+        var a = up/down
+        var b = muy - a*mux
+        var ad = '+'
+        if(b<0){
+          ad = ''
+        }
+        var p1 = [max,max*a+b]
+        var p2 = [min,min*a+b]
+        console.log(a)
+        var title = $("#input_title").val()
+        var xname = $("#input_xname").val()
+        var yname = $("#input_yname").val()
+        $("#viewer").html('')
+        Highcharts.chart('viewer', {
+          title: {
+              text: title
+          },
+          xAxis: {
+            title: {
+              text: xname
+            }
+          },
+          yAxis: {
+            title: {
+              text: yname
+            }
+          },
+          plotOptions: {
+            scatter: {
+              dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: false
+            }
+          },
+          series: [{
+              type: 'line',
+              name: '回歸直線：y=' + a.toFixed(3) + 'x' + ad + b.toFixed(3),
+              data: [p1,p2],
+              marker: {
+                  enabled: false
+              },
+              states: {
+                  hover: {
+                      lineWidth: 0
+                  }
+              }
+          }, {
+              type: 'scatter',
+              name: '數據',
+              data: data,
+              marker: {
+                  radius: 4
+              }
+          }]
+        });
+      }
+    </script>
+  </body>
+</html>
