@@ -1,6 +1,6 @@
 
 回歸直線繪圖網站-Giraph：
-[andyjjrt.github.io/work/giraph](/giraph)
+[andyjjrt.github.io/work/giraph](/work/giraph)
 
 
-more......
+Last updat:10/13
