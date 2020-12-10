@@ -174,7 +174,7 @@
                             this.alerts.push({ error: "數據有空值，無法繪圖" })
                             break;
                         }
-                        data.push([parseFLoat(this.table[i].x), parseFloat(this.table[i].y)]);
+                        data.push([parseFloat(this.table[i].x), parseFloat(this.table[i].y)]);
                     }
                     //calculating regression line
                     var mux = 0, muy = 0
