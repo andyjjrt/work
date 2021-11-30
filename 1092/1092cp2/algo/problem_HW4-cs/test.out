@@ -1,0 +1,46 @@
+0 x x x x x x x x x 
+Init x x x x x x x x x 
+0 5 x 20 x x x x x x 
+Init 36 x K x x x x x x 
+0 5 8 16 x x x x x x 
+Init 36 36 A x x x x x x 
+0 5 8 16 14 x x x x x 
+Init 36 36 A 82 x x x x x 
+0 5 8 16 14 x 20 x x x 
+Init 36 36 A 82 x 82 x x x 
+0 5 8 16 14 x 20 x x x 
+Init 36 36 A 82 x 82 x x x 
+0 5 8 16 14 x 20 x x x 
+Init 36 36 A 82 x 82 x x x 
+16
+0 x x x x x x x x x 
+Init x x x x x x x x x 
+0 5 x 20 x x x x x x 
+Init 36 x K x x x x x x 
+0 5 8 16 x x x x x x 
+Init 36 36 A x x x x x x 
+0 5 8 16 14 x x x x x 
+Init 36 36 A 82 x x x x x 
+0 5 8 16 14 x 20 x x x 
+Init 36 36 A 82 x 82 x x x 
+0 5 8 16 14 x 20 x x x 
+Init 36 36 A 82 x 82 x x x 
+0 5 8 16 14 x 20 x x x 
+Init 36 36 A 82 x 82 x x x 
+20
+x x 0 x x x x x x x 
+x x Init x x x x x x x 
+x x 0 x 1 x x x x x 
+x x Init x 82 x x x x x 
+x x 0 x 1 x 7 x x x 
+x x Init x 82 x 82 x x x 
+x x 0 x 1 x 7 x x x 
+x x Init x 82 x 82 x x x 
+0
+x x x x 0 x x x x x 
+x x x x Init x x x x x 
+x x x x 0 x 6 x x x 
+x x x x Init x 82 x x x 
+x x x x 0 x 6 x x x 
+x x x x Init x 82 x x x 
+-1
