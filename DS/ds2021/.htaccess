@@ -1,0 +1,4 @@
+AuthName  "restricted area"
+AuthType Basic
+AuthUserFile /home1/teachers2/whliao/.htpasswd
+require valid-user
