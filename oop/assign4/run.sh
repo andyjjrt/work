@@ -1,0 +1,1 @@
+chmox +x vector_i86pc-sample && make && ./vector_ > myanswer.txt && ./vector_i86pc-sample > sample.txt && diff myanswer.txt sample.txt
